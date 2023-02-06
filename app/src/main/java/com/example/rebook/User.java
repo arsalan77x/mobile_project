@@ -1,20 +1,20 @@
 package com.example.rebook;
 
 
-import java.util.ArrayList;
-
 public class User {
 
 
     private String password;
     private String email;
+    private String book;
     private String username;
     public static User loggedInUser = null;
 
 
-    public User(String email,String password, String username){
+    public User(String email, String book,String password, String username){
         this.email = email;
         this.password = password;
+        this.book = book;
 
         this.username= username;
 
@@ -22,6 +22,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getBook() {
+        return book;
     }
 
     public String getPassword() {

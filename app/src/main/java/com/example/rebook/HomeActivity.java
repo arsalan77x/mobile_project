@@ -28,7 +28,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
         userDatabase = new UserDB(HomeActivity.this);
         userArrayList = new ArrayList<>();
         userArrayList = userDatabase.fetchUsers();
@@ -47,54 +46,61 @@ public class HomeActivity extends AppCompatActivity {
             userLoggedIn = LoginActivity.getUserByEmail(email);
         }
 
-        Button profileButton = (Button) findViewById(R.id.profileButton);
-        Button shopButton = (Button) findViewById(R.id.shopButton);
-        Button libraryButton = (Button) findViewById(R.id.libraryButton);
-
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (email.equals("")) {
-                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                    Toast.makeText(getApplicationContext(),
-                            "You are not logged in yet!", Toast.LENGTH_SHORT).show();
-                } else {
-                    startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
-                }
-
-            }
-        });
-
-        shopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, ShopActivity.class));
-            }
-        });
-
-        libraryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, LibraryActivity.class));
-            }
-        });
     }
 
 
 
-    public void goToReview1(View view) {
-        tester = "1";
+    public void goShop(View view) {
+        if (userLoggedIn == null) {
+            Toast toast = Toast.makeText(this, "You are not logged in.", Toast.LENGTH_LONG);
+            toast.show();
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        }
+        else {
+            startActivity(new Intent(HomeActivity.this, ShopActivity.class));
+        }
+
+    }
+
+    public void goLibrary(View view) {
+        if (userLoggedIn == null) {
+            Toast toast = Toast.makeText(this, "You are not logged in.", Toast.LENGTH_LONG);
+            toast.show();
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        } else{
+            startActivity(new Intent(HomeActivity.this, LibraryActivity.class));
+        }
+
+    }
+
+    public void goProfile(View view) {
+        if (email.equals("")) {
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+            Toast.makeText(getApplicationContext(),
+                    "You are not logged in yet!", Toast.LENGTH_SHORT).show();
+        } else {
+            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+        }
+    }
+    public void goExit(View view) {
+        HomeActivity.this.finish();
+        System.exit(0);
+    }
+
+    public void go1(View view) {
+        tester="1";
         startActivity(new Intent(HomeActivity.this, ReviewActivity.class));
     }
-
-    public void goToReview2(View view) {
-        tester = "2";
+    public void go2(View view) {
+        tester="2";
         startActivity(new Intent(HomeActivity.this, ReviewActivity.class));
     }
-
-    public void goToReview3(View view) {
-        tester = "3";
+    public void go3(View view) {
+        tester="6";
+        startActivity(new Intent(HomeActivity.this, ReviewActivity.class));
+    }
+    public void go4(View view) {
+        tester="3";
         startActivity(new Intent(HomeActivity.this, ReviewActivity.class));
     }
 }

@@ -23,13 +23,13 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button logoutButton = (Button) findViewById(R.id.logoutButton);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button applyEmail = (Button) findViewById(R.id.applyButton);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button applyPass = (Button) findViewById(R.id.applyButton2);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button applyUser = (Button) findViewById(R.id.applyButton3);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText changeEmail = (EditText) findViewById(R.id.changeEmailText);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText changePassword = (EditText) findViewById(R.id.changePasswordText);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText changeUsername = (EditText) findViewById(R.id.changeUserName);
+        Button logoutButton = (Button) findViewById(R.id.logoutButton);
+        Button applyEmail = (Button) findViewById(R.id.applyButton);
+        Button applyPass = (Button) findViewById(R.id.applyButton2);
+        Button applyUser = (Button) findViewById(R.id.applyButton3);
+        EditText changeEmail = (EditText) findViewById(R.id.changeEmailText);
+        EditText changePassword = (EditText) findViewById(R.id.changePasswordText);
+        EditText changeUsername = (EditText) findViewById(R.id.changeUserName);
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         applyEmail.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
                 if (newEmail.matches(emailPattern) && newEmail.length() > 0
                         && !RegisterActivity.isUserExist(newEmail)) {
                     HomeActivity.userDatabase.updateUser(HomeActivity.userLoggedIn.getEmail(),
-                            newEmail, HomeActivity.userLoggedIn.getPassword(),
+                            newEmail,HomeActivity.userLoggedIn.getBook(), HomeActivity.userLoggedIn.getPassword(),
                             HomeActivity.userLoggedIn.getUsername());
                     Toast.makeText(getApplicationContext(),
                             "Email changed!", Toast.LENGTH_SHORT).show();
@@ -67,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 if (newPass.length() > 0 && !newPass.equals(HomeActivity.userLoggedIn.getPassword())) {
                     HomeActivity.userDatabase.updatePass(HomeActivity.userLoggedIn.getPassword(),
-                            HomeActivity.userLoggedIn.getEmail(), newPass,
+                            HomeActivity.userLoggedIn.getEmail(),HomeActivity.userLoggedIn.getBook(), newPass,
                             HomeActivity.userLoggedIn.getUsername());
                     Toast.makeText(getApplicationContext(),
                             "Password changed!", Toast.LENGTH_SHORT).show();
@@ -87,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
                 String newUser = changeUsername.getText().toString();
                 if (newUser.length() > 0) {
                     HomeActivity.userDatabase.updateUser(HomeActivity.userLoggedIn.getEmail(),
-                            HomeActivity.userLoggedIn.getEmail(), HomeActivity.userLoggedIn.getPassword(),
+                            HomeActivity.userLoggedIn.getEmail(),HomeActivity.userLoggedIn.getBook(), HomeActivity.userLoggedIn.getPassword(),
 
                             newUser);
                     Toast.makeText(getApplicationContext(),

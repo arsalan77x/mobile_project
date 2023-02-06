@@ -21,6 +21,7 @@ public class UserDB extends SQLiteOpenHelper {
     private static final String ID_COL = "id";
     private static final String EMAIL_COL = "email";
     private static final String PASSWORD_COL = "password";
+    private static final String BOOK_COL = "book";
 
     private static final String USERNAME_COL = "username";
 
@@ -36,6 +37,7 @@ public class UserDB extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + EMAIL_COL + " TEXT,"
+                + BOOK_COL + " TEXT,"
                 + PASSWORD_COL + " TEXT,"
                 + USERNAME_COL + " TEXT)";
 
@@ -43,10 +45,11 @@ public class UserDB extends SQLiteOpenHelper {
     }
 
 
-    public void addNewUser(String email, String password, String username) {
+    public void addNewUser(String email,String book, String password, String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(EMAIL_COL, email);
+        values.put(BOOK_COL, book);
         values.put(PASSWORD_COL, password);
         values.put(USERNAME_COL, username);
         db.insert(TABLE_NAME, null, values);
@@ -54,10 +57,11 @@ public class UserDB extends SQLiteOpenHelper {
 
     }
 
-    public void updateUser(String lastEmail, String email, String password, String username) {
+    public void updateUser(String lastEmail, String email,String book, String password, String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(EMAIL_COL, email);
+        values.put(BOOK_COL, book);
         values.put(PASSWORD_COL, password);
         values.put(USERNAME_COL, username);
         db.update(TABLE_NAME, values, "email=?", new String[]{lastEmail});
@@ -66,10 +70,11 @@ public class UserDB extends SQLiteOpenHelper {
 
 
 
-    public void updatePass(String lastPass, String email, String password, String username) {
+    public void updatePass(String lastPass, String email,String book, String password, String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(EMAIL_COL, email);
+        values.put(BOOK_COL, book);
         values.put(PASSWORD_COL, password);
         values.put(USERNAME_COL, username);
         db.update(TABLE_NAME, values, "password=?", new String[]{lastPass});
@@ -86,7 +91,8 @@ public class UserDB extends SQLiteOpenHelper {
             do {
                 userArrayList.add(new User(cursorUser.getString(1),
                         cursorUser.getString(2),
-                        cursorUser.getString(3)));
+                        cursorUser.getString(3),
+                        cursorUser.getString(4)));
             } while (cursorUser.moveToNext());
 
         }

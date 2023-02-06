@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = passwordText.getText().toString();
                 if (email.matches(emailPattern) && email.length() > 0
                         && !isUserExist(email) && password.length() > 3) {
-                    HomeActivity.userDatabase.addNewUser(email, password,"Player");
+                    HomeActivity.userDatabase.addNewUser(email,"174", password,"new user");
                     HomeActivity.userArrayList = new ArrayList<>();
                     HomeActivity.userArrayList = HomeActivity.userDatabase.fetchUsers();
                     Toast.makeText(getApplicationContext(),
@@ -70,7 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
     public static boolean isUserExist(String email) {
 
         for (int i = 0; i <  HomeActivity.userArrayList.size(); i++) {
-           // Log.d(LOG_TAG,  HomeActivity.userArrayList.get(i).getEmail() + "//" + email);
             if ( HomeActivity.userArrayList.get(i).getEmail().equals(email)){
                 return true;
             }
